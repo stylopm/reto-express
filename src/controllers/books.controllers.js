@@ -1,7 +1,7 @@
 const Books = require("../models/bookSchema");
 const { respApi, msgFormatCons } = require('../helpers/helpers');
 
-// localhost:5000/users
+// localhost:5000/books
 const getBooks = async (req, res) => {
   try {
     msgFormatCons("Lista de libros");
@@ -27,7 +27,7 @@ const createBook = async (req, res) => {
   }
 };
 
-// localhost:5000/users/1
+// localhost:5000/books/1
 const updateBook = async (req, res) => {
   try {
     msgFormatCons("Actualización de libro");
