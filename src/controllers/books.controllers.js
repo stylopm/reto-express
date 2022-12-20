@@ -1,4 +1,5 @@
 const Books = require("../models/bookSchema");
+const { respApi, msgFormatCons } = require('../helpers/helpers');
 
 // localhost:5000/users
 const getBooks = async (req, res) => {
@@ -52,19 +53,6 @@ const deleteBook = async (req, res) => {
       msg: "Hubo un error al actualizar el libro",
     });
   }
-};
-
-// Funcion general para la parte de respuesta
-const respApi = (res, msg, data) => {
-  res.json({
-    msg: msg,
-    total: data.length,
-    data: data,
-  });
-};
-
-const msgFormatCons = (msj) => {
-  console.log(`\x1b[33m ${msj}\x1b[0m`);
 };
 
 module.exports = {
