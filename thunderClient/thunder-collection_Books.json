@@ -1,0 +1,104 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Books",
+    "dateExported": "2023-05-11T22:01:31.715Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "09a57145-da2b-4b35-918a-340c15a60fc3",
+            "name": "Books",
+            "containerId": "",
+            "created": "2023-05-11T05:15:43.064Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "9c9c5f24-200d-4157-9a5d-8e2c031ce381",
+            "name": "Users",
+            "containerId": "",
+            "created": "2023-05-11T05:15:47.973Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "3aabfadd-0497-4b17-b91e-9349d817b6d4",
+            "colId": "8571d5ea-b19b-438f-ba3a-34e97e3c8e66",
+            "containerId": "",
+            "name": "Home",
+            "url": "localhost:5000",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-05-11T04:10:04.548Z",
+            "modified": "2023-05-11T05:16:26.792Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "09ddc0ca-902e-4c5e-bcbf-7a779d34f3f2",
+            "colId": "8571d5ea-b19b-438f-ba3a-34e97e3c8e66",
+            "containerId": "09a57145-da2b-4b35-918a-340c15a60fc3",
+            "name": "All books",
+            "url": "localhost:5000/Books",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-05-11T05:16:02.224Z",
+            "modified": "2023-05-11T05:16:39.686Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2745ae6b-2d74-432a-9a5c-ceb3717db261",
+            "colId": "8571d5ea-b19b-438f-ba3a-34e97e3c8e66",
+            "containerId": "9c9c5f24-200d-4157-9a5d-8e2c031ce381",
+            "name": "Users",
+            "url": "localhost:5000/Users",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-05-11T05:16:48.950Z",
+            "modified": "2023-05-11T05:16:56.805Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d339b2e4-642e-426d-bd39-6c3d3dbe0fcb",
+            "colId": "8571d5ea-b19b-438f-ba3a-34e97e3c8e66",
+            "containerId": "9c9c5f24-200d-4157-9a5d-8e2c031ce381",
+            "name": "Signup user",
+            "url": "localhost:5000/Users/signup",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-05-11T05:19:00.792Z",
+            "modified": "2023-05-11T05:50:20.511Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"apmurillo99@gmail.com\",\n  \"password\":\"12345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "63e638a9-eb92-41dc-bef3-71923dbd1136",
+            "colId": "8571d5ea-b19b-438f-ba3a-34e97e3c8e66",
+            "containerId": "9c9c5f24-200d-4157-9a5d-8e2c031ce381",
+            "name": "Login user",
+            "url": "localhost:5000/Users/login",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-05-11T06:10:27.713Z",
+            "modified": "2023-05-11T06:11:19.928Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"apmurillo99@gmail.com\",\n  \"password\":\"12345678\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
