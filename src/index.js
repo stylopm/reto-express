@@ -26,3 +26,4 @@ app.get('/', (req, res) => {
 });
 
 app.use('/books', require('./routes/books.routes'));
+app.use('/users', require('./routes/users.routes'));
