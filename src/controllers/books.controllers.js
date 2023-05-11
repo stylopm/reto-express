@@ -1,15 +1,9 @@
 const Books = require("../models/bookSchema");
 const { respApi, msgFormatCons } = require('../helpers/helpers');
-
-const { fecthUserByToken } = require('../helpers/fecthUserByToken');
 const User = require("../models/UserSchema");
 
 // localhost:5000/books
 const getBooks = async (req, res) => {
-
-  fecthUserByToken(req).then(()=>{}).catch((error)=>{})
-
-
   try {
     msgFormatCons("Lista de libros");
     const books = await Books.find({});
