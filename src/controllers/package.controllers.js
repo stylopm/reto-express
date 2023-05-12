@@ -6,9 +6,10 @@ const User = require("../models/UserSchema");
 const getPackage = async (req, res) => {
   try {
     msgFormatConst("Lista de paguetes");
-    const Package = await Package.find({});
-    respApi(res, "Success", Package);
-  } catch {
+    const result = await Package.find({});
+    respApi(res, "Success", result);
+  } catch (error){
+    console.log(error);
     res.status(500).json({
       msg: "Hubo un error al obtener los datos",
     });
@@ -19,8 +20,8 @@ const getPackage = async (req, res) => {
 const createPackage = async (req, res) => {
   try {
     msgFormatConst("Creación de paguetes");
-    const Package = await Package.create(req.body);
-    respApi(res, "Success", Package);
+    const result = await Package.create(req.body);
+    respApi(res, "Success", result);
   } catch {
     res.status(500).json({
       msg: "Hubo un error al obtener los datos",
