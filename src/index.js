@@ -22,8 +22,9 @@ app.listen(process.env.PORT, () => {
 // localhost:5000
 // localhost:5000/
 app.get('/', (req, res) => {
-  res.send('Hola estan en mi api');
+  res.send('Se ha levantado con exitó la API');
 });
 
 app.use('/books', require('./routes/books.routes'));
 app.use('/users', require('./routes/users.routes'));
+app.use('/packages', require('./routes/packages.routes'));

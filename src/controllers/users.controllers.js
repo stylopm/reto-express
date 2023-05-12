@@ -69,35 +69,24 @@ const verifyUser = async (req, res) => {
 
 //LOGIN
 const loginUser = async (req, res) => {
-  //PEDIMOS ESTOS PARAMETROS POR EL BODY
   const { email, password } = req.body
   try {
-    //ENCONTRAMOS UN USUARIO
     let foundUser = await User.findOne({ email: email })
     if (!foundUser) {
-      //SI NO HUBO UN USUARIO ENCONTRADO, DEVOLVEMOS UN ERROR
       return res.status(400).json({ msg: 'El usuario no existe' })
     }
-    //SI TODO ESTA BIEN, HACEMOS LA EVALUACIÓN DE LA CONTRASEÑA ENVIADA CONTRA LA BASE DE DATOS.
     const passRight = await bcryptjs.compare(password, foundUser.password)
-
-    //SI EL USUARIO ES INCORRECTO, REGRESAMOS UN MENSAJE SOBRE ESTO
     if (!passRight) {
       return await res.status(400).json({ msg: 'Contraseña incorrecta' })
     }
-
-    //SI TODO CORRECTO, GENERAMOS UN JSON WEB TOKEN
-    //1. DATOS DE ACOMPAÑAMIENTO DEL TOKEN
     const payload = {
       user: {
         id: foundUser.id,
       }
     }
-    //2. FIRMA DEL JWT
     if (email && passRight) {
       jwt.sign(payload, process.env.SECRET, { expiresIn: 3600000 }, (error, token) => {
         if (error) throw error
-        //SI TODO SUCEDIO CORRECTAMENTE, RETORNAR EL TOKEN
         res.json({ token })
       })
     } else {

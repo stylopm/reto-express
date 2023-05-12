@@ -1,11 +1,11 @@
 const Books = require("../models/bookSchema");
-const { respApi, msgFormatCons } = require('../helpers/helpers');
+const { respApi, msgFormatConst } = require('../helpers/helpers');
 const User = require("../models/UserSchema");
 
 // localhost:5000/books
 const getBooks = async (req, res) => {
   try {
-    msgFormatCons("Lista de libros");
+    msgFormatConst("Lista de libros");
     const books = await Books.find({});
     respApi(res, "Success", books);
   } catch {
@@ -18,7 +18,7 @@ const getBooks = async (req, res) => {
 // localhost:5000/books
 const createBook = async (req, res) => {
   try {
-    msgFormatCons("Creación de libros");
+    msgFormatConst("Creación de libros");
     const book = await Books.create(req.body);
     respApi(res, "Success", book);
   } catch {
@@ -31,7 +31,7 @@ const createBook = async (req, res) => {
 // localhost:5000/books/1
 const updateBook = async (req, res) => {
   try {
-    msgFormatCons("Actualización de libro");
+    msgFormatConst("Actualización de libro");
     const newUpdate = await Books.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -46,7 +46,7 @@ const updateBook = async (req, res) => {
 // localhost:5000/books/1
 const deleteBook = async (req, res) => {
   try {
-    msgFormatCons("Eliminar libro");
+    msgFormatConst("Eliminar libro");
     const newUpdate = await Books.findByIdAndRemove({ _id: req.params.id });
     respApi(res, "Success", newUpdate);
   } catch {
