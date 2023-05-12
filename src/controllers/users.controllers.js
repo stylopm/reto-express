@@ -22,32 +22,35 @@ const createUser = async (req, res) => {
   const { name, email, password } = req.body
   if (!req.body.email || !req.body.password) {
     msgFormatConst("Error al crear usuario");
-    res.json({ success: false, error: "Envía los parámetros necesarios" })
+    res.json({ success: false, msg: "Envía los parámetros necesarios" })
     return
   }
-
-
-    User.findOne({ email: req.body.email }).then
-    ((user) => {
-      if (user) {
-        {
-        res.json({ success: false, error: "El usuario ya existe" })
-      }
-    }})
-  
   try {
     const salt = await bcryptjs.genSalt(10)
     const hashedPassword = await bcryptjs.hash(password, salt)
-    const Users = await User.create({
-      name, email, password: hashedPassword
-    })
-    msgFormatConst('createUsers');
-    return res.status(200).json({
-      msg: 'Usuario creado',
-    })
+    User.findOne({ email: req.body.email }).then
+      ((user) => {
+        if (user) {
+          {
+            return res.json({ success: false, msg: "El usuario ya existe" })
+          }
+        } else {
+          User.create({
+            email, password: hashedPassword
+          })
+          msgFormatConst('createUsers');
+          return res.status(200).json({
+            success: true,
+            msg: 'Usuario creado',
+          })
+        }
+      })
+
+
   } catch (error) {
     console.log(error);
     return res.status(400).json({
+      success: false,
       msg: error,
     })
   }
@@ -73,11 +76,11 @@ const loginUser = async (req, res) => {
   try {
     let foundUser = await User.findOne({ email: email })
     if (!foundUser) {
-      return res.status(400).json({ msg: 'El usuario no existe' })
+      return res.json({ success: false, msg: 'El usuario no existe' })
     }
     const passRight = await bcryptjs.compare(password, foundUser.password)
     if (!passRight) {
-      return await res.status(400).json({ msg: 'Contraseña incorrecta' })
+      return await res.json({ success: false, msg: 'Contraseña incorrecta' })
     }
     const payload = {
       user: {
@@ -87,14 +90,14 @@ const loginUser = async (req, res) => {
     if (email && passRight) {
       jwt.sign(payload, process.env.SECRET, { expiresIn: 3600000 }, (error, token) => {
         if (error) throw error
-        res.json({ token })
+        res.json({ success: true, token: token })
       })
     } else {
-      res.json({ msg: 'Hubo un erorr', error })
+      res.json({ success: false, msg: 'Hubo un error', error })
     }
   }
   catch (error) {
-    res.json({ msg: 'Hubo un error al iniciar sesión', error })
+    res.json({ success: false, msg: 'Hubo un error al iniciar sesión', error })
   }
 }
 
