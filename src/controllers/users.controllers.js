@@ -88,7 +88,7 @@ const loginUser = async (req, res) => {
       }
     }
     if (email && passRight) {
-      jwt.sign(payload, process.env.SECRET, { expiresIn: 3600000 }, (error, token) => {
+      jwt.sign(payload, process.env.SECRET_JWT_CODE, { expiresIn: 3600000 }, (error, token) => {
         if (error) throw error
         res.json({ success: true, token: token })
       })
@@ -97,6 +97,7 @@ const loginUser = async (req, res) => {
     }
   }
   catch (error) {
+    console.log(error);
     res.json({ success: false, msg: 'Hubo un error al iniciar sesión', error })
   }
 }
