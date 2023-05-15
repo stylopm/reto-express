@@ -3,7 +3,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { dbConnection } = require('./config/db');
+const cron = require("node-cron");
 const app = express();
+const { updateAllPackages } = require('./controllers/package.controllers');
+
+
 // middlewares
 app.use(bodyParser.json());
 app.use(express.json());
@@ -23,6 +27,18 @@ app.listen(process.env.PORT, () => {
 app.get('/', (req, res) => {
   res.send('Se ha levantado con exitó la API');
 });
+
+cron.schedule(`*/${process.env.SECOND} * * * * *`, function () {
+  var hoy = new Date();
+  var fecha = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+  var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
+  var fechaYHora = fecha + ' ' + hora;
+  console.log("---------------------------------------------------------------");
+  console.log(`running a task every ${process.env.SECOND} seconds ${fechaYHora}`  );
+  console.log("---------------------------------------------------------------");
+  updateAllPackages();
+});
+
 
 app.use('/users', require('./routes/users.routes'));
 app.use('/packages', require('./routes/packages.routes'));

@@ -3,6 +3,7 @@ const { respApi, msgFormatConst } = require('../helpers/helpers');
 const axios = require('axios');
 require('dotenv').config();
 
+
 const updateAllPackages = async () => {
   let packageList = await Package.find({});
   packageList.map(
@@ -20,10 +21,20 @@ const updateAllPackages = async () => {
           return res
         })
         .catch((error) => {
+          console.log('\x1b[31m ******************************************* \x1b[0m');
+          console.log(
+            `\x1b[31m **  Error  ** \x1b[0m`
+          );
           console.error(error)
+          console.log('\x1b[31m ******************************************* \x1b[0m');
         })
     }
   )
+  console.log('\x1b[32m ************************************************ \x1b[0m');
+  console.log(
+    `\x1b[32m **  Se actualizan los registros exitosamente  ** \x1b[0m`
+  );
+  console.log('\x1b[32m ************************************************ \x1b[0m');
 }
 
 
@@ -87,4 +98,5 @@ module.exports = {
   createPackage,
   updatePackage,
   deletePackage,
+  updateAllPackages
 };
