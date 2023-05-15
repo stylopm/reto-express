@@ -15,6 +15,7 @@ const updateAllPackages = async () => {
       })
         .then(async (res) => {
           data.status = res.data.Status
+          data.updatedate =  new Date();
           await Package.findByIdAndUpdate(data.id, data, {
             new: true,
           });
