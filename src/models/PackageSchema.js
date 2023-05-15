@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const PackageSchema = mongoose.Schema(
   {
-    id: { type: String, required: true },
+    shipping_id: { type: String, required: true },
     guide: { type: String, required: true },
     package: { type: String, required: true }
   }
