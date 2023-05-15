@@ -1,14 +1,39 @@
 const Package = require("../models/PackageSchema");
 const { respApi, msgFormatConst } = require('../helpers/helpers');
-const User = require("../models/UserSchema");
+const axios = require('axios');
+require('dotenv').config();
+
+const updateAllPackages = async () => {
+  let packageList = await Package.find({});
+  packageList.map(
+    async (data) => {
+      await axios.get(process.env.URLAPI + "/" + data.shipping_id, {
+        headers: {
+          'Authorization': process.env.KEYAPI
+        }
+      })
+        .then(async (res) => {
+          data.status = res.data.Status
+          await Package.findByIdAndUpdate(data.id, data, {
+            new: true,
+          });
+          return res
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
+  )
+}
+
+
 
 // localhost:5000/Package
 const getPackage = async (req, res) => {
   try {
-    msgFormatConst("Lista de paguetes");
-    const result = await Package.find({});
-    respApi(res, "Success", result);
-  } catch (error){
+    let packageListUpdate = await Package.find({});
+    respApi(res, "Success", packageListUpdate);
+  } catch (error) {
     console.log(error);
     res.status(500).json({
       msg: "Hubo un error al obtener los datos",

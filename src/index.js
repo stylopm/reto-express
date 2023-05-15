@@ -24,6 +24,5 @@ app.get('/', (req, res) => {
   res.send('Se ha levantado con exitó la API');
 });
 
-app.use('/books', require('./routes/books.routes'));
 app.use('/users', require('./routes/users.routes'));
 app.use('/packages', require('./routes/packages.routes'));
