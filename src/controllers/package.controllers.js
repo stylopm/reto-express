@@ -14,7 +14,7 @@ const updateAllPackages = async () => {
         }
       })
         .then(async (res) => {
-          data.status = res.data.Status
+          data.status = res.data.TrackingStatus
           data.updatedate =  new Date();
           await Package.findByIdAndUpdate(data.id, data, {
             new: true,
