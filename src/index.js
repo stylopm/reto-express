@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   res.send('Se ha levantado con exitó la API');
 });
 
-cron.schedule(`*/${process.env.SECOND} * * * * *`, function () {
+cron.schedule(`*/${process.env.MINUTES} * * * * `, function () {
   var hoy = new Date();
   var fecha = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
   var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
